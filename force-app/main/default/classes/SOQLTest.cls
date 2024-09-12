@@ -334,15 +334,18 @@ public with sharing class SOQLTest {
         // Create test data
         Opportunity testOpp1 = new Opportunity(Name = 'Test Opportunity 1', StageName = 'Prospecting', Amount = 5000, CloseDate = Date.today());
         Opportunity testOpp2 = new Opportunity(Name = 'Test Opportunity 2', StageName = 'Closed Won', Amount = 20000, CloseDate = Date.today());
-        Opportunity testOpp3 = new Opportunity(Name = 'Test Opportunity 3', StageName = 'Closed Lost', Amount = 15000, CloseDate = Date.today(),Close_Reason__c = 'Lost: Competitor');
+        Opportunity testOpp3 = new Opportunity(Name = 'Test Opportunity 3', StageName = 'Closed Lost', Amount = 15000, CloseDate = Date.today(), Close_Reason__c = 'Lost: Competitor');
         Opportunity testOpp4 = new Opportunity(Name = 'Test Opportunity 4', StageName = 'Closed Won', Amount = 10000, CloseDate = Date.today());
         insert new List<Opportunity>{testOpp1, testOpp2, testOpp3, testOpp4};
 
         // Call the method to test
         Decimal totalRevenue = SOQL.getTotalRevenueByStage('Closed Won');
-
-        // Assert that the total revenue returned is correct
+        
+        // Calculate expected revenue: only Closed Won opportunities
         Decimal expectedRevenue = testOpp2.Amount + testOpp3.Amount + testOpp4.Amount;
+        
+        // Assert that the total revenue returned is correct
+        
         System.assertEquals(expectedRevenue, totalRevenue, 'Total revenue is incorrect.');
     }
 
