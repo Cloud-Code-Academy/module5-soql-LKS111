@@ -343,6 +343,9 @@ public with sharing class SOQLTest {
         
         // Calculate expected revenue: only Closed Won opportunities
         Decimal expectedRevenue = testOpp2.Amount + testOpp3.Amount + testOpp4.Amount;
+
+        // Calculate expected revenue: only Closed Won opportunities
+        //Decimal expectedRevenue = testOpp2.Amount + testOpp3.Amount + testOpp4.Amount;
         
         // Assert that the total revenue returned is correct
         
