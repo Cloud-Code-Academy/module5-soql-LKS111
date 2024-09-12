@@ -231,23 +231,19 @@ public with sharing class SOQL {
      */
     public static Decimal getTotalRevenueByStage(String stage) 
     {
-        // Use AggregateQuery to get the total revenue
-        AggregateResult[] results = [
-            SELECT SUM(Amount) totalRevenue 
-            FROM Opportunity 
-            WHERE StageName = :stage 
-            OR Amount > 10000
-        ];
+        Decimal totalRevenue = 0;
 
-        // Return the total revenue
-        if (results.size() > 0) 
-        {
-            return (Decimal)results[0].get('totalRevenue');
-        } else 
-        {
-            return 0;
-        }    
+        // Query opportunities based on the provided stage
+        List<Opportunity> opportunities = [SELECT Amount FROM Opportunity WHERE StageName = :stage OR Amount > 10000];
+    
+        // Calculate the total revenue
+        for (Opportunity opp : opportunities) {
+            totalRevenue += opp.Amount;
+        }
+    
+        return totalRevenue;
     }
+    
 
     /**
      * Question 13
