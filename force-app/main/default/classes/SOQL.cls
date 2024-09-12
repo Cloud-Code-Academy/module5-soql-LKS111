@@ -30,7 +30,7 @@ public with sharing class SOQL {
      */
     public static List<Lead> getAllLeads() 
     {
-        return [SELECT Id, LastName, Company, Phone, Email FROM Lead];
+        return [SELECT Id, LastName, Company, Phone, Email FROM Lead LIMIT 1000];
     }
 
     /**

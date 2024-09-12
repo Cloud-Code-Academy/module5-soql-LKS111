@@ -715,7 +715,7 @@ public with sharing class SOQLTest {
 
         // Query for the cloned line items
         List<OpportunityLineItem> clonedLineItems = [SELECT Id, Quantity, UnitPrice,TotalPrice FROM OpportunityLineItem WHERE OpportunityId = :testOpp2.Id];
-        System.debug('Cloned Line Items: ' + clonedLineItems);
+        //System.debug('Cloned Line Items: ' + clonedLineItems);
 
         // Assert that the line items were cloned correctly
         System.assertEquals(1, clonedLineItems.size(), 'Number of cloned line items is incorrect.');
